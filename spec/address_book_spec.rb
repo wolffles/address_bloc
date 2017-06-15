@@ -30,7 +30,7 @@ let(:book) {AddressBook.new}
      end
    end
    describe "remove entry" do
-     it "removes entry duh" do
+     it "removes entry" do
        book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       book.remove_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       expect(book.entries.size).to eq(0)
