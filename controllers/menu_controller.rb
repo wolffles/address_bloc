@@ -70,13 +70,41 @@ class MenuController
     email = gets.chomp
 
     #5 uses add_entry from address_book.rb
-    address_book.add_entry(name,phone_number,email).
+    address_book.add_entry(name,phone_number,email)
 
     system "clear"
     puts "New entry created"
   end
 
-  def search_entries
+  def search_entries #made the searches exact instead of if it includes but just showing i know the difference.
+    puts "How would you like to search for the entry?"
+    puts "1. Name"
+    puts "2. Phone number"
+    puts "3. Email"
+    puts "4. Entry number"
+    input = gets.chomp
+    case input
+    when '1'
+        print "Name: "
+        input = gets.chomp
+        puts address_book.entries.select{|x| x.name == input }
+      when '2'
+        print "Phone number: "
+        input = gets.chomp
+        puts address_book.entries.select{|x| x.phone_number == input }
+      when '3'
+        print "Email: "
+        input = gets.chomp
+        puts address_book.entries.select{|x| x.email == input }
+      when '4'
+        print "Which entry number did you want?"
+        input = gets.to_i
+        puts address_book.entries[input - 1]
+      else
+        system "clear"
+        puts "sorry that isn't a valid response"
+        search_entries
+      end
   end
 
   def read_csv
