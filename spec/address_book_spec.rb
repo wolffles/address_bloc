@@ -1,7 +1,8 @@
 require_relative '../models/address_book'
 
 RSpec.describe AddressBook do
-let(:book) { AddressBook.new }
+  let(:book) { AddressBook.new }
+  let(:book2) { AddressBook.new.import }
 
   def check_entry(entry, expected_name, expected_number, expected_email)
     expect(entry.name).to eq expected_name
@@ -47,8 +48,7 @@ let(:book) { AddressBook.new }
    describe "#import_from_csv" do
      it "imports the correct number of entries" do
       book.import_from_csv("entries.csv")
-      book.import_from_csv("entries2.csv")
-      expect(book.entries.size).to eq 8
+      expect(book.entries.size).to eq 5
      end
 
    it "imports the 1st entry" do
@@ -80,26 +80,30 @@ let(:book) { AddressBook.new }
        entry_five = book.entries[4]
        check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
      end
-     it "imports the 6th entry" do
-       book.import_from_csv("entries.csv")
-       book.import_from_csv("entries2.csv")
-       entry_six = book.entries[6]
-       check_entry(entry_six, 'wolfgang', "123-456-7890", "wolfgang@blah.com")
-     end
-     it "imports the 7th entry" do
-       book.import_from_csv("entries.csv")
-       book.import_from_csv("entries2.csv")
-       entry_seven = book.entries[7]
-       check_entry(entry_seven, "wolfie", "098-765-4321", "wolfie@blah.com")
+   end
+
+   describe "import entries from entries_2.csv" do
+     it "imports the correct number of entries" do
+      book.import_from_csv("entries2.csv")
+      expect(book.entries.size).to eq 3
      end
 
-     it "imports the 8th entry" do
-       book.import_from_csv("entries.csv")
+     it "imports the 1th entry" do
        book.import_from_csv("entries2.csv")
-       entry_eight = book.entries[5]
-       check_entry(entry_eight,  "wolffles", "000-000-0000", "wolffles@blah.com")
+       entry_one = book.entries[1]
+       check_entry(entry_one, 'wolfgang', "123-456-7890", "wolfgang@blah.com")
+     end
+     it "imports the 2th entry" do
+       book.import_from_csv("entries2.csv")
+       entry_two = book.entries[2]
+       check_entry(entry_two, "wolfie", "098-765-4321", "wolfie@blah.com")
      end
 
+     it "imports the 3th entry" do
+       book.import_from_csv("entries2.csv")
+       entry_three = book.entries[0]
+       check_entry(entry_three,  "wolffles", "000-000-0000", "wolffles@blah.com")
+     end
    end
 
 end
