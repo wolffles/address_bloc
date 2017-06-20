@@ -52,5 +52,10 @@ class AddressBook
       end
       return nil
     end
+
+    def iterative_search(input)
+      selected = entries.select{|x| x.name == input}
+      selected == [] ? nil : selected[0]
+    end
   end
 end
