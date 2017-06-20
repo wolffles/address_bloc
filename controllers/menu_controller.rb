@@ -11,7 +11,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - PROTOCOL_ZERO!!!! o.0"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -36,6 +37,10 @@ class MenuController
         read_csv
         main_menu
       when 5
+        system "clear"
+        protocol_zero
+        main_menu
+      when 6
         puts "Good-bye!"
         #2 terminate the program using exit(0) 0 signals the program is exiting without an error.
         exit(0)
@@ -236,4 +241,8 @@ class MenuController
     puts entry
   end
 
+  def protocol_zero
+    address_book.entries.clear
+    puts "you've gone Protocol Zero don't forget to nuke your hardware."
+  end
 end
